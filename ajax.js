@@ -1,5 +1,5 @@
 'use strict';
-// version 1.1a
+// version 1.0
 
 q(function() {
 
