@@ -1,5 +1,5 @@
 'use strict';
-// version 1.6
+// version 1.8
 
 let _q = function(obj) {
 	this.obj = obj;
@@ -19,6 +19,10 @@ _q.prototype.each = function(callback) {
 
 _q.prototype.exists = function() {
 	return this.obj.length > 0;
+}
+
+_q.prototype.size = function() {
+	return this.obj.length;
 }
 
 _q.prototype.css = function(attr, value) {
@@ -176,16 +180,20 @@ _ajax.prototype.success = function(success) {
 					console.log(error);
 					success(this.response);
 				}
+			} else if (this.status == 0) {
+				console.log("Ajax error 0");
 			} else {
-				document.write(this.response);
+				console.log(this.response);
+//				document.write(this.response);
 			}
 		}
 	};
 	return this;
 };
 
-_ajax.prototype.process = function() {
-	this.req.send();
+_ajax.prototype.process = function(body) {
+	if (body) this.req.send(body);
+	else this.req.send();
 };
 
 q.ajax = function(url, method = "GET") {
